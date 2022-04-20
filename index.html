@@ -101,7 +101,7 @@
           <div class="slds-form-element__control">
             <input
               type="text"
-              id="text-input-id-btn-text"
+              id="text-input-id-img-url"
               placeholder="Placeholder text…"
               required=""
               class="slds-input"
@@ -166,7 +166,7 @@
         sdk.getData(function (data) {
           var btntext = document.getElementById("text-input-id-btn-text").value;
           var align = document.getElementById('select-align').selectedOptions[0].value;
-          var imgurl = 'https://www.w3schools.com/howto/img_snow_wide.jpg';
+          var imgurl = document.getElementById("text-input-id-img-url").value;
           sdk.setData({
             buttonText: btntext,
             align: align,
@@ -195,6 +195,7 @@
       };
 
       var btntext = document.getElementById("text-input-id-btn-text").value;
+      var imgurl = document.getElementById("text-input-id-img-url").value;
       var align = document.getElementById('select-align').selectedOptions[0].value;
 
       var sdk = new window.sfdc.BlockSDK({
