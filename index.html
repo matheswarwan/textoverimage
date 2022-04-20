@@ -122,8 +122,17 @@
           </select>
           </div>
           </div>
-          </div>
+          
       </div>
+
+
+      <div style="padding-top: 5px">
+        <div>
+          <input class="btn" type="button" value="Render" id="renderBtn" />
+        </div>
+      </div>
+
+
       <div style="padding-top: 5px">
         <div class="alert" id="alertBox">
           <div style="width: 100%" class="alertmessage">
@@ -210,27 +219,10 @@
       sdk.setBlockEditorWidth(500, function (data) {
         //consoleprint(debug, "Block width set to 500. Data received " + data);
       });
-      document.getElementById("text-input-id-btn-text").addEventListener(
-        "input",
-        debounce((e) => {
-          //consoleprint(debug, "entered - " + document.getElementById("text-input-id-btn-text").value)
-          /*consoleprint('html --> ' + getHtml(
-            document.getElementById("text-input-id-btn-text").value, 
-            'https://www.w3schools.com/howto/img_snow_wide.jpg',
-            document.getElementById('select-align').selectedOptions[0].value
-          ))*/
-          renderPreview();
-        }, 500)
-      );
-      document.getElementById("select-align").addEventListener(
-        "input",
-        debounce((e) => {
-          consoleprint(debug, "selected " + document.getElementById('select-align').selectedOptions[0].value)
-          renderPreview();
-        }, 50)
-      );
-      
-
+      document.getElementById("renderBtn").addEventListener(
+        "click",
+          renderPreview()
+        );      
 
       sdk.getContent(function (content) {
         if (content) {
