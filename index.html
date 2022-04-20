@@ -141,6 +141,7 @@
 
     <script>
       function getHtml(btntext, imgurl, position) {
+        console.log('getHTML function received ' + btntext + ' - ' + imgurl + ' - ' + position)
         var txtContent;
         if(position == 'bottom-left') {
           txtContent = '<div style="position: absolute;bottom: 8px;left: 16px;">'+btntext+'</div>'
@@ -158,7 +159,7 @@
           ${txtContent}
         </div>
         `;
-        consoleprint(debug, 'HTML to render ' + htmlButton);
+        console.log(debug, 'HTML to render ' + htmlButton);
         return htmlButton;
       }
     
