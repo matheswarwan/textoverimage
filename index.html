@@ -179,6 +179,7 @@
           var imgurl = document.getElementById("text-input-id-img-url").value;
           sdk.setData({
             buttonText: btntext,
+            imgurl : imgurl, 
             align: align,
             htmlButton: getHtml(btntext, imgurl, align),
           });
@@ -233,12 +234,12 @@
 
       sdk.getData(function (data) {
         if (isEmptyObject(data)) {
-          document.getElementById("text-input-id-btn-text").value =
-            "Enter Text for overlaying";
+          document.getElementById("text-input-id-btn-text").value = "Enter Text for overlaying";
+          document.getElementById("text-input-id-img-url").value = "https://upload.wikimedia.org/wikipedia/commons/1/1b/Sf-marketingcloud-logo.png";
           document.getElementById('select-align').value = 'Left';
         } else {
-          document.getElementById("text-input-id-btn-text").value =
-            data["buttonText"];
+          document.getElementById("text-input-id-btn-text").value = data["buttonText"];
+          document.getElementById("text-input-id-img-url").value = data["imgurl"]
           document.getElementById('select-align').value = data['align'];
         }
       });
