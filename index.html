@@ -93,6 +93,22 @@
             />
           </div>
         </div>
+
+        <div class="slds-form-element">
+          <label class="slds-form-element__label" for="text-input-id-btn-text"
+            >Image URL</label
+          >
+          <div class="slds-form-element__control">
+            <input
+              type="text"
+              id="text-input-id-btn-text"
+              placeholder="Placeholder text…"
+              required=""
+              class="slds-input"
+            />
+          </div>
+        </div>
+
         <div class="slds-form-element">
           <label class="slds-form-element__label" for="select-01">Position</label>
           <div class="slds-form-element__control">
@@ -124,21 +140,21 @@
     <script src="blocksdk.js"></script>
 
     <script>
-      function getHtml(btntext, position) {
+      function getHtml(btntext, imgurl, position) {
         var txtContent;
         if(position == 'bottom-left') {
-          txtContent = '<div style="position: absolute;bottom: 8px;left: 16px;">Bottom Left</div>'
+          txtContent = '<div style="position: absolute;bottom: 8px;left: 16px;">'+btntext+'</div>'
         }else if(position == 'top-left') {
-          txtContent = '<div style="position: absolute;top: 8px;left: 16px;">Top Left</div>'
+          txtContent = '<div style="position: absolute;top: 8px;left: 16px;">'+btntext+'</div>'
         }else if(position == 'top-right') {
-          txtContent = '<div style="position: absolute;top: 8px;right: 16px;">Top Right</div>'
+          txtContent = '<div style="position: absolute;top: 8px;right: 16px;">'+btntext+'</div>'
         }else if(position == 'bottom-right') {
-          txtContent = '<div style="position: absolute;bottom: 8px;right: 16px;">Bottom Right</div>'
+          txtContent = '<div style="position: absolute;bottom: 8px;right: 16px;">'+btntext+'</div>'
         }else if(position == 'centered') {
-          txtContent = '<div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">Centered</div>'
+          txtContent = '<div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">'+btntext+'</div>'
         }
         var htmlButton = `<div style="position: relative;text-align: center;color: white;">
-          <img src="https://www.w3schools.com/howto/img_snow_wide.jpg" alt="Snow" style="width:100%;">
+          <img src="${imgurl}" alt="Snow" style="width:100%;">
           ${txtContent}
         </div>
         `;
@@ -150,14 +166,15 @@
         sdk.getData(function (data) {
           var btntext = document.getElementById("text-input-id-btn-text").value;
           var align = document.getElementById('select-align').selectedOptions[0].value;
+          var imgurl = 'https://www.w3schools.com/howto/img_snow_wide.jpg';
           sdk.setData({
             buttonText: btntext,
             align: align,
-            htmlButton: getHtml(btntext, align),
+            htmlButton: getHtml(btntext, imgurl, align),
           });
 
           //Set content for preview
-          sdk.setContent(getHtml(btntext, align));
+          sdk.setContent(getHtml(btntext, imgurl, align));
         });
       }
 
@@ -194,11 +211,12 @@
       document.getElementById("text-input-id-btn-text").addEventListener(
         "input",
         debounce((e) => {
-          consoleprint(debug, "entered - " + document.getElementById("text-input-id-btn-text").value)
-          consoleprint('html --> ' + getHtml(
+          //consoleprint(debug, "entered - " + document.getElementById("text-input-id-btn-text").value)
+          /*consoleprint('html --> ' + getHtml(
             document.getElementById("text-input-id-btn-text").value, 
+            'https://www.w3schools.com/howto/img_snow_wide.jpg',
             document.getElementById('select-align').selectedOptions[0].value
-          ))
+          ))*/
           renderPreview();
         }, 500)
       );
@@ -222,7 +240,7 @@
       sdk.getData(function (data) {
         if (isEmptyObject(data)) {
           document.getElementById("text-input-id-btn-text").value =
-            "Enter Button Name";
+            "Enter Text for overlaying";
           document.getElementById('select-align').value = 'Left';
         } else {
           document.getElementById("text-input-id-btn-text").value =
