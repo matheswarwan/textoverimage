@@ -1,0 +1,256 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/button-touch.css" />
+    <link rel="stylesheet" href="css/button-index.css" />
+    <link rel="stylesheet" href="css/input-index.css" />
+    <link rel="stylesheet" href="css/input-index.css" />
+    <link rel="stylesheet" href="css/form-element-index.css" />
+    <link rel="stylesheet" href="css/form-element-index.css" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/require.js"></script>
+    <style>
+      .slds-form-element{
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .btn {
+        background: #0070d2;
+        color: #fff;
+        box-shadow: none;
+        outline: None;
+        display: inline-block;
+        margin-bottom: 0;
+        font-weight: regular;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 1;
+        cursor: pointer;
+        background-image: none;
+        box-shadow: none;
+        white-space: nowrap;
+        border: 0;
+        padding: 5px 10px;
+        font-size: 11px;
+        border-radius: 3px;
+      }
+      .alert {
+        background-color: 10px;
+        font-size: 12px;
+        border-radius: 0.25rem;
+        padding: 6px 5px 6px 5px;
+        min-width: rem(480px);
+        position: relative;
+        font-weight: 300;
+        border: none;
+        color: #a94442;
+        box-sizing: border-box;
+        display: none;
+      }
+      .alertmessage {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        font-size: 12px;
+        display: inline-block;
+        text-align: left;
+        word-break: break-word;
+        font-family: Arial;
+        box-sizing: border-box;
+        color: #fff;
+        background-color: #c23934;
+        border: 1px solid #999999;
+        padding: 5px;
+      }
+      textarea {
+        width: 100%;
+      }
+      .textwrapper {
+        margin: 5px 0;
+        padding: 3px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div style="width: 100%; height: 80%">
+      <div class="textwrapper">
+        <div class="slds-form-element">
+          <label class="slds-form-element__label" for="text-input-id-btn-text"
+            >Image Text</label
+          >
+          <div class="slds-form-element__control">
+            <input
+              type="text"
+              id="text-input-id-btn-text"
+              placeholder="Placeholder text…"
+              required=""
+              class="slds-input"
+              value="Enter image text"
+            />
+          </div>
+        </div>
+        <div class="slds-form-element">
+          <label class="slds-form-element__label" for="select-01">Position</label>
+          <div class="slds-form-element__control">
+          <div class="slds-select_container">
+          <select class="slds-select" id="select-align">
+            <option value="bottom-left">Bottom Left</option>
+            <option value="top-left">Top Left</option>
+            <option value="top-right">Top Right</option>
+            <option value="bottom-right">Bottom Right</option>
+            <option value="centered">Centered</option>
+          </select>
+          </div>
+          </div>
+          </div>
+      </div>
+      <div style="padding-top: 5px">
+        <div class="alert" id="alertBox">
+          <div style="width: 100%" class="alertmessage">
+            <span
+              class="close"
+              style="float: right; position: relative; top: 3px; right: 3px"
+              >&times;</span
+            >
+            <div style="top: 10px" id="errorMsg"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="blocksdk.js"></script>
+
+    <script>
+      function getHtml(btntext, position) {
+        var txtContent;
+        if(position == 'bottom-left') {
+          txtContent = '<div style="position: absolute;bottom: 8px;left: 16px;">Bottom Left</div>'
+        }else if(position == 'top-left') {
+          txtContent = '<div style="position: absolute;top: 8px;left: 16px;">Top Left</div>'
+        }else if(position == 'top-right') {
+          txtContent = '<div style="position: absolute;top: 8px;right: 16px;">Top Right</div>'
+        }else if(position == 'bottom-right') {
+          txtContent = '<div style="position: absolute;bottom: 8px;right: 16px;">Bottom Right</div>'
+        }else if(position == 'centered') {
+          txtContent = '<div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">Centered</div>'
+        }
+        var htmlButton = `<div style="position: relative;text-align: center;color: white;">
+          <img src="https://www.w3schools.com/howto/img_snow_wide.jpg" alt="Snow" style="width:100%;">
+          ${txtContent}
+        </div>
+        `;
+        consoleprint(debug, 'HTML to render ' + htmlButton);
+        return htmlButton;
+      }
+    
+      function renderPreview() {
+        sdk.getData(function (data) {
+          var btntext = document.getElementById("text-input-id-btn-text").value;
+          var align = document.getElementById('select-align').selectedOptions[0].value;
+          sdk.setData({
+            buttonText: btntext,
+            align: align,
+            htmlButton: getHtml(btntext, align),
+          });
+
+          //Set content for preview
+          sdk.setContent(getHtml(btntext, align));
+        });
+      }
+
+      var textAreaContent;
+      var errMsg;
+      var debug = true;
+
+      const debounce = (fn, delay) => {
+        let timeOutID;
+        return function (...args) {
+          if (timeOutID) {
+            clearTimeout(timeOutID);
+          }
+          timeOutID = setTimeout(() => {
+            fn(...args);
+          }, delay);
+        };
+      };
+
+      var btntext = document.getElementById("text-input-id-btn-text").value;
+      var align = document.getElementById('select-align').selectedOptions[0].value;
+
+      var sdk = new window.sfdc.BlockSDK({
+        blockEditorWidth: 500,
+        tabs: ["htmlblock", "stylingblock"],
+      });
+
+      /* Reset Everything */
+      document.getElementById("alertBox").style.display = "none";
+      document.getElementById("errorMsg").innerHTML = "";
+      sdk.setBlockEditorWidth(500, function (data) {
+        //consoleprint(debug, "Block width set to 500. Data received " + data);
+      });
+      document.getElementById("text-input-id-btn-text").addEventListener(
+        "input",
+        debounce((e) => {
+          consoleprint(debug, "entered - " + document.getElementById("text-input-id-btn-text").value)
+          consoleprint('html --> ' + getHtml(
+            document.getElementById("text-input-id-btn-text").value, 
+            document.getElementById('select-align').selectedOptions[0].value
+          ))
+          renderPreview();
+        }, 500)
+      );
+      document.getElementById("select-align").addEventListener(
+        "input",
+        debounce((e) => {
+          consoleprint(debug, "selected " + document.getElementById('select-align').selectedOptions[0].value)
+          renderPreview();
+        }, 50)
+      );
+      
+
+
+      sdk.getContent(function (content) {
+        if (content) {
+          sdk.setContent(content, function (contentFound) {
+          });
+        } 
+      });
+
+      sdk.getData(function (data) {
+        if (isEmptyObject(data)) {
+          document.getElementById("text-input-id-btn-text").value =
+            "Enter Button Name";
+          document.getElementById('select-align').value = 'Left';
+        } else {
+          document.getElementById("text-input-id-btn-text").value =
+            data["buttonText"];
+          document.getElementById('select-align').value = data['align'];
+        }
+      });
+
+    </script>
+
+    <script>
+      function isEmptyObject(obj) {
+        for (var i in obj) return false;
+        return true;
+      }       
+      function consoleprint(debug, msg) {
+        debug ? console.log(msg) : "";
+      }
+
+      /* close button in error msg */
+      var closebtns = document.getElementsByClassName("close");
+      var i;
+
+      for (i = 0; i < closebtns.length; i++) {
+        closebtns[i].addEventListener("click", function () {
+          this.parentElement.parentElement.style.display = "none";
+        });
+      }
+    </script>
+  </body>
+</html>
