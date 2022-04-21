@@ -1,4 +1,5 @@
-<div id='f' style="font-family: customFont;" >The quick brown fox jumps over the lazy dog.</div>
+<div id='f' >The quick brown fox jumps over the lazy dog.</div>
+<!-- style="font-family: customFont;" -->
 <div id='customFontContent'></div>
 
 <script>
@@ -12,7 +13,8 @@ var newStyle = document.createElement('style');
 newStyle.appendChild(document.createTextNode('@font-face{font-family: '+fontName+'; src: url('+d.fontBase64+');}'));
 //document.body.appendChild(newStyle);
 document.getElementById('customFontContent').appendChild(newStyle);
-
+var style = '@font-face: { font-family: ' + fontName + '; src: url("'+d.fontBase64+'");}'
+document.getElementById('f').setAttribute('style', style);
 //document.getElementById('f').setAttribute('font-family', name)
 
 </script>

@@ -86,13 +86,6 @@
             console.log('base64 of uploaded font ' + reader.result);
             document.getElementById('hiddenfontBase64').value = reader.result;  
             //MK TODO: Set sdk.setData( imageBase64 = reader.result)
-            /* set font - start */
-            var fontName = 'customFont'
-            var newStyle = document.createElement('style');
-            newStyle.appendChild(document.createTextNode('@font-face{font-family: '+fontName+'; src: url('+reader.result+');}'));
-            //document.body.appendChild(newStyle);
-            document.getElementById('customFontContent').appendChild(newStyle);
-            /* set font - end */
           };
           reader.readAsDataURL(inputFont.files[0]);
       }
@@ -274,8 +267,40 @@
     }//Save Data Ends 
 
     function generateHTMLContent(dataJson){
+        /* set font - start */
+        var fontName = 'customFont'
+        var parentDiv = document.createElement('parentDiv')
+        var newStyle = document.createElement('style');
+        newStyle.appendChild(document.createTextNode('@font-face{font-family: '+fontName+'; src: url('+dataJson.fontBase64+');}'));
+        //document.body.appendChild(newStyle);
+        document.getElementById('parentDiv').appendChild(newStyle);
+
+
+
+
+        var fontName = 'customFont'
+        var parentDiv = document.createElement('div')
+        var newStyle = document.createElement('style');
+        newStyle.appendChild(document.createTextNode('@font-face{font-family: '+fontName+'; src: url('+dataJson.fontBase64+');}'));
+        //document.body.appendChild(newStyle);
+        parentDiv.appendChild(newStyle);
+
+        var imgDiv = document.createElement('div');
+        imgDiv.style = "position: relative;text-align: center;color: white;"; /* mk123 TODO : change this based on position */
+        imgDiv.innerHTML = dataJson.textOverImage;
+        var imgTag = document.createElement('img');
+        imgTag.src = data.imageBase64; 
+        imgTag.alt = "SNOW"
+        imgTag.style = "width:100%;"
+
+        parentDiv.appendChild(imgDiv);
+        console.log('HTML to render ' + parentDiv);
+
+        return parentDiv;
+
+        /* set font - end */
         
-        var posContent;
+        /*var posContent;
         //harcoded - mk123
         //setting position 
         position = 'centered';
@@ -290,17 +315,18 @@
         }else if(position == 'centered') {
           posContent = '<div style="font-family: customFont; position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">'+dataJson.textOverImage+'</div>'
         }
-
+        */
         //document.getElementById('f').setAttribute('font-family', name)
 
        
-        var htmlContent = `<div style="position: relative;text-align: center;color: white;">
+       /* var htmlContent = `<div style="position: relative;text-align: center;color: white;">
             <img src="${dataJson.imageBase64}" alt="Snow" style="width:100%;">
             ${posContent}
           </div>
           `;
-        console.log('HTML to render ' + htmlContent);
-        return htmlContent;
+        var finalElement = document.getElementById('parentDiv').appendChild(htmlContent);
+        console.log('HTML to render ' + finalElement); */
+        //return finalElement;
     }
 
     function isEmptyObject(obj) {
