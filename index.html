@@ -98,19 +98,14 @@
       var inputFont = event.srcElement;
       var fileName = inputFont.files[0].name;
     }
-    /*  ==========================================
-        SHOW UPLOADED IMAGE NAME
     
-    var input = document.getElementById( 'uploadImage' );
-    var infoArea = document.getElementById( 'upload-label' );
-
-    input.addEventListener( 'change', showFileName );
-    function showFileName( event ) {
-      var input = event.srcElement;
-      var fileName = input.files[0].name;
-      infoArea.textContent = 'File name: ' + fileName;
-      infoArea.style.display = "block"
-    }* ========================================== */
+    /* set font - start */
+    var fontName = 'customFont'
+    var newStyle = document.createElement('style');
+    newStyle.appendChild(document.createTextNode('@font-face{font-family: '+fontName+'; src: url('+dataJson.fontBase64+');}'));
+    //document.body.appendChild(newStyle);
+    document.getElementById('customFontContent').appendChild(newStyle);
+    /* set font - end */
 
   </script>
   <!-- Addition Settings - End -->
@@ -280,12 +275,6 @@
     }//Save Data Ends 
 
     function generateHTMLContent(dataJson){
-        //setting font 
-        var fontName = 'customFont'
-        var newStyle = document.createElement('style');
-        newStyle.appendChild(document.createTextNode('@font-face{font-family: '+fontName+'; src: url('+dataJson.fontBase64+');}'));
-        //document.body.appendChild(newStyle);
-        document.getElementById('customFontContent').appendChild(newStyle);
         
         var posContent;
         //harcoded - mk123
