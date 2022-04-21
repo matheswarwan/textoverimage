@@ -30,6 +30,7 @@
         } -->
     <input type='hidden' id="hiddentextOverImage"></input>
     <input type='hidden' id="hiddenfontBase64"></input>
+    <div id='customFontContent'></div>
     <input type='hidden' id="hiddenimageUrl"></input>
     <input type='hidden' id="hiddenimageBase64"></input>
     <input type='hidden' id="hiddenimagePosition_width"></input>
@@ -283,7 +284,8 @@
         var fontName = 'customFont'
         var newStyle = document.createElement('style');
         newStyle.appendChild(document.createTextNode('@font-face{font-family: '+fontName+'; src: url('+dataJson.fontBase64+');}'));
-        document.body.appendChild(newStyle);
+        //document.body.appendChild(newStyle);
+        document.getElementById('customFontContent').appendChild(newStyle);
         
         var posContent;
         //harcoded - mk123
