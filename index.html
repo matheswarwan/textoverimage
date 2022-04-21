@@ -107,7 +107,7 @@
       <div class="jumbotron text-left">
         <p>Image</p>
         <div class="d-flex p-2">Tip: provide an external URL or browse from assets</div>
-        <label for="imageUrl">External URL</label>
+        <label for="imageUrl">External URL (WIP)</label>
         <input type="text" class="form-control" id="imageUrl">
         <label class="d-flex p-2" for="uploadImage">Upload Image</label>
         <input type="file" class="form-control" id="uploadImage" accept=".jpg,.gif,.png" />
@@ -171,7 +171,7 @@
   <div class="row">
     <div class="col-sm">
       <div class="jumbotron text-left">
-        <p>Image Position</p>
+        <p>Image Position (WIP)</p>
         <div class = "jumbotron" style="background-color: beige; width:50%; height: 50%; margin: auto">
           <div>left</div>
           <div>right</div>
@@ -266,6 +266,27 @@
         sdk.setContent(generateHTMLContent(data));
     }//Save Data Ends 
 
+    async function fetchImages() {
+        url = "https://content-builder.s10.marketingcloudapps.com/fuelapi/asset/v1/content/assets/query?scope=ours"
+        body =  "{\"page\":{\"page\":1,\"pageSize\":30},\"sort\":[{\"property\":\"modifiedDate\",\"direction\":\"desc\"}],\"query\":{\"property\":\"assetType.id\",\"simpleOperator\":\"in\",\"values\":[8,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39]}}"
+        requestOptions = {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            credentials: "same-origin",
+            },
+            body: body, 
+        };
+
+        fetch(url, requestOptions)
+            .then((response) => response.json())
+            .then( function(data) {  
+                //console.log(" Fetch call done" + JSON.stringify(data)); 
+                return data;   } );
+    }
+
+    fetchImages().then( function(returnData) { console.log('Fetch Image data'); console.log(returnData); } ) 
+
     function generateHTMLContent(dataJson){
         /* set font - start */
 
@@ -292,35 +313,6 @@
 
         return parentDiv.outerHTML;
 
-        /* set font - end */
-        
-        /*var posContent;
-        //harcoded - mk123
-        //setting position 
-        position = 'centered';
-        if(position == 'bottom-left') {
-          posContent = '<div style="font-family: customFont; position: absolute;bottom: 8px;left: 16px;">'+dataJson.textOverImage+'</div>'
-        }else if(position == 'top-left') {
-          posContent = '<div style="font-family: customFont; position: absolute;top: 8px;left: 16px;">'+dataJson.textOverImage+'</div>'
-        }else if(position == 'top-right') {
-          posContent = '<div style="font-family: customFont; position: absolute;top: 8px;right: 16px;">'+dataJson.textOverImage+'</div>'
-        }else if(position == 'bottom-right') {
-          posContent = '<div style="font-family: customFont; position: absolute;bottom: 8px;right: 16px;">'+dataJson.textOverImage+'</div>'
-        }else if(position == 'centered') {
-          posContent = '<div style="font-family: customFont; position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">'+dataJson.textOverImage+'</div>'
-        }
-        */
-        //document.getElementById('f').setAttribute('font-family', name)
-
-       
-       /* var htmlContent = `<div style="position: relative;text-align: center;color: white;">
-            <img src="${dataJson.imageBase64}" alt="Snow" style="width:100%;">
-            ${posContent}
-          </div>
-          `;
-        var finalElement = document.getElementById('parentDiv').appendChild(htmlContent);
-        console.log('HTML to render ' + finalElement); */
-        //return finalElement;
     }
 
     function isEmptyObject(obj) {
