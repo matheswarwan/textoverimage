@@ -277,7 +277,7 @@
         parentDiv.appendChild(newStyle);
 
         var imgDiv = document.createElement('div');
-        imgDiv.style = "position: relative;text-align: center;color: white;"; /* mk123 TODO : change this based on position */
+        imgDiv.style = "position: relative;text-align: center;color: white; font-family: customFont"; /* mk123 TODO : change this based on position ; only if customfont is present, add this*/
         imgDiv.innerHTML = dataJson.textOverImage;
         var imgTag = document.createElement('img');
         imgTag.src = dataJson.imageBase64; 
@@ -285,8 +285,9 @@
         imgTag.style = "width:100%;"
 
         parentDiv.appendChild(imgDiv);
+        parentDiv.appendChild(imgTag);
 
-        console.log('HTML to render ' + parentDiv.outerHTML);
+        console.log('HTML to render <br> \n' + parentDiv.outerHTML);
 
         return parentDiv.outerHTML;
 
