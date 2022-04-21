@@ -1,8 +1,134 @@
-<div style="position: relative;text-align: center;color: white;">
-  <img src="https://www.w3schools.com/howto/img_snow_wide.jpg" alt="Snow" style="width:100%;">
-  <div style="position: absolute;bottom: 8px;left: 16px;">Bottom Left</div>
-  <div style="position: absolute;top: 8px;left: 16px;">Top Left</div>
-  <div style="position: absolute;top: 8px;right: 16px;">Top Right</div>
-  <div style="position: absolute;bottom: 8px;right: 16px;">Bottom Right</div>
-  <div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">Centered</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="jumbotron text-left">
+        <p>Text over image</p>
+        <!-- CKEditor - Start -->
+        <div id="editor"></div>
+        <input type="button" id="submit" value="submit"/>
+        <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+        <script>
+          var ce = ClassicEditor
+              .create( document.querySelector( '#editor' ) )
+              .then( newEditor => {
+                editor = newEditor;
+              })
+              .catch( error => {
+                  console.error( error );
+              } );
+          
+          document.querySelector( '#submit' ).addEventListener( 'click', () => {
+            const editorData = editor.getData();
+            console.log(editorData);
+          });
+         
+              
+        </script>
+        <!-- CKEditor - End -->
+      </div>
+    </div>
+  </div>
+  <!-- Addition Settings - Start -->
+  <div class="row">
+    <div class="col-sm">
+      <div class="jumbotron text-left">
+        <p>Additional Settings</p>
+        <div class="d-flex p-2">Tip: Add custom font that will be stored as base64 encoded font in your image</div>
+        <label class="d-flex p-2" for="customFile">Upload Font</label>
+        <input type="file" class="form-control" id="uploadFont" />
+      </div>
+    </div>
+  </div>
+  <!-- Addition Settings - End -->
+  <!-- Image - Start -->
+  <div class="row">
+    <div class="col-sm">
+      <div class="jumbotron text-left">
+        <p>Image</p>
+        <div class="d-flex p-2">Tip: provide an external URL or browse from assets</div>
+        <label for="imageUrl">External URL</label>
+        <input type="text" class="form-control" id="imageUrl">
+        <label class="d-flex p-2" for="uploadedImagePreview">Upload Image</label>
+
+        
+
+        <input type="file" class="form-control" id="uploadedImagePreview" />
+      </div>
+    </div>
+  </div>
+  
+  <div class="image-area mt-4" style="text-align: center;">
+    <label id="upload-label" for="imageResult" class="font-weight-light text-muted" style="display:none">File name</label>
+    <img id="imageResult" src="#" alt=""class="img-fluid rounded shadow-sm mx-auto d-block">
+  </div>
+  <script>
+    //https://jsfiddle.net/bootstrapious/8w7a50n2
+    $(function () {
+      $('#uploadedImagePreview').on('change', function () {
+          readURL(input);
+      });
+    });
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+  
+          reader.onload = function (e) {
+              $('#imageResult')
+                  .attr('src', e.target.result)
+                  .attr('style','height: 100px; width: 100px;');
+
+              console.log('base64 of uploaded image' + reader.result);
+              //MK TODO: Set sdk.setData( imageBase64 = reader.result)
+          };
+          reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    /*  ==========================================
+        SHOW UPLOADED IMAGE NAME
+    * ========================================== */
+    var input = document.getElementById( 'uploadedImagePreview' );
+    var infoArea = document.getElementById( 'upload-label' );
+
+    input.addEventListener( 'change', showFileName );
+    function showFileName( event ) {
+      var input = event.srcElement;
+      var fileName = input.files[0].name;
+      infoArea.textContent = 'File name: ' + fileName;
+      infoArea.style.display = "block"
+    }
+
+  </script>
+  <!-- Image - End -->
+  <!-- Image Position - Start -->
+  <div class="row">
+    <div class="col-sm">
+      <div class="jumbotron text-left">
+        <p>Image Position</p>
+        <div class = "jumbotron" style="background-color: beige; width:50%; height: 50%; margin: auto">
+          <div>left</div>
+          <div>right</div>
+          <div>top</div>
+          <div>bottom</div>
+          <div class = "jumbotron" style="background-color:burlywood; width:100%; height: 100%; margin: auto">
+          </div>
+        </div>
+    </div>
+  </div>
+  <!-- Image Position - End -->
+  
 </div>
+
+</body>
+</html>

@@ -1,269 +1,300 @@
-<html>
-  <head>
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap"
-      rel="stylesheet"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="css/button-touch.css" />
-    <link rel="stylesheet" href="css/button-index.css" />
-    <link rel="stylesheet" href="css/input-index.css" />
-    <link rel="stylesheet" href="css/input-index.css" />
-    <link rel="stylesheet" href="css/form-element-index.css" />
-    <link rel="stylesheet" href="css/form-element-index.css" />
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/require.js"></script>
-    <style>
-      .slds-form-element{
-        font-family: Arial, Helvetica, sans-serif;
-      }
-      .btn {
-        background: #0070d2;
-        color: #fff;
-        box-shadow: none;
-        outline: None;
-        display: inline-block;
-        margin-bottom: 0;
-        font-weight: regular;
-        text-align: center;
-        vertical-align: middle;
-        line-height: 1;
-        cursor: pointer;
-        background-image: none;
-        box-shadow: none;
-        white-space: nowrap;
-        border: 0;
-        padding: 5px 10px;
-        font-size: 11px;
-        border-radius: 3px;
-      }
-      .alert {
-        background-color: 10px;
-        font-size: 12px;
-        border-radius: 0.25rem;
-        padding: 6px 5px 6px 5px;
-        min-width: rem(480px);
-        position: relative;
-        font-weight: 300;
-        border: none;
-        color: #a94442;
-        box-sizing: border-box;
-        display: none;
-      }
-      .alertmessage {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-        font-size: 12px;
-        display: inline-block;
-        text-align: left;
-        word-break: break-word;
-        font-family: Arial;
-        box-sizing: border-box;
-        color: #fff;
-        background-color: #c23934;
-        border: 1px solid #999999;
-        padding: 5px;
-      }
-      textarea {
-        width: 100%;
-      }
-      .textwrapper {
-        margin: 5px 0;
-        padding: 3px;
-      }
-    </style>
-  </head>
-
-  <body>
-    <div style="width: 100%; height: 80%">
-      <div class="textwrapper">
-        <div class="slds-form-element">
-          <label class="slds-form-element__label" for="text-input-id-btn-text"
-            >Image Text</label
-          >
-          <div class="slds-form-element__control">
-            <input
-              type="text"
-              id="text-input-id-btn-text"
-              placeholder="Placeholder text…"
-              required=""
-              class="slds-input"
-              value="Enter image text"
-            />
-          </div>
-        </div>
-
-        <div class="slds-form-element">
-          <label class="slds-form-element__label" for="text-input-id-btn-text"
-            >Image URL</label
-          >
-          <div class="slds-form-element__control">
-            <input
-              type="text"
-              id="text-input-id-img-url"
-              placeholder="Placeholder text…"
-              required=""
-              class="slds-input"
-            />
-          </div>
-        </div>
-
-        <div class="slds-form-element">
-          <label class="slds-form-element__label" for="select-01">Position</label>
-          <div class="slds-form-element__control">
-          <div class="slds-select_container">
-          <select class="slds-select" id="select-align">
-            <option value="bottom-left">Bottom Left</option>
-            <option value="top-left">Top Left</option>
-            <option value="top-right">Top Right</option>
-            <option value="bottom-right">Bottom Right</option>
-            <option value="centered">Centered</option>
-          </select>
-          </div>
-          </div>
-          
-      </div>
-
-
-      <div style="padding-top: 5px">
-        <div>
-          <input class="btn" type="button" value="Render" id="renderBtn" />
-        </div>
-      </div>
-
-
-      <div style="padding-top: 5px">
-        <div class="alert" id="alertBox">
-          <div style="width: 100%" class="alertmessage">
-            <span
-              class="close"
-              style="float: right; position: relative; top: 3px; right: 3px"
-              >&times;</span
-            >
-            <div style="top: 10px" id="errorMsg"></div>
-          </div>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="blocksdk.js"></script>
+</head>
+<body>
+    <!-- hidden fields - start -->
+    <!-- imageUrl : 'imageUrl',
+    imageBase64 : 'imageBase64',
+    imagePosition : {
+        width : '100px',
+        height : '100px',
+        margin : {
+            top : '5px',
+            bottom : '5px',
+            left : '5px',
+            right : '5px'
+        },
+        padding : {
+            top : '5px',
+            bottom : '5px',
+            left : '5px',
+            right : '5px'
+        } -->
+    <input type='hidden' id="hiddentextOverImage"></input>
+    <input type='hidden' id="hiddenfontBase64"></input>
+    <input type='hidden' id="hiddenimageUrl"></input>
+    <input type='hidden' id="hiddenimageBase64"></input>
+    <input type='hidden' id="hiddenimagePosition_width"></input>
+    <input type='hidden' id="hiddenimagePosition_height"></input>
+    <!-- hidden fields - end  -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="jumbotron text-left">
+        <p>Text over image</p>
+        <!-- CKEditor - Start -->
+        <div id="editor"></div>
+        <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+        <script>
+          var ce = ClassicEditor
+              .create( document.querySelector( '#editor' ) )
+              .then( newEditor => {
+                editor = newEditor;
+              })
+              .catch( error => {
+                  console.error( error );
+              } );     
+        </script>
+        <!-- CKEditor - End -->
       </div>
     </div>
-    <script src="blocksdk.js"></script>
-
-    <script>
-      function getHtml(btntext, imgurl, position) {
-        console.log('getHTML function received ' + btntext + ' - ' + imgurl + ' - ' + position)
-        var txtContent;
-        if(position == 'bottom-left') {
-          txtContent = '<div style="position: absolute;bottom: 8px;left: 16px;">'+btntext+'</div>'
-        }else if(position == 'top-left') {
-          txtContent = '<div style="position: absolute;top: 8px;left: 16px;">'+btntext+'</div>'
-        }else if(position == 'top-right') {
-          txtContent = '<div style="position: absolute;top: 8px;right: 16px;">'+btntext+'</div>'
-        }else if(position == 'bottom-right') {
-          txtContent = '<div style="position: absolute;bottom: 8px;right: 16px;">'+btntext+'</div>'
-        }else if(position == 'centered') {
-          txtContent = '<div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">'+btntext+'</div>'
-        }
-        var htmlButton = `<div style="position: relative;text-align: center;color: white;">
-          <img src="${imgurl}" alt="Snow" style="width:100%;">
-          ${txtContent}
-        </div>
-        `;
-        console.log(debug, 'HTML to render ' + htmlButton);
-        return htmlButton;
+  </div>
+  <!-- Addition Settings - Start -->
+  <div class="row">
+    <div class="col-sm">
+      <div class="jumbotron text-left">
+        <p>Additional Settings</p>
+        <div class="d-flex p-2">Tip: Add custom font that will be stored as base64 encoded font in your image</div>
+        <label class="d-flex p-2" for="uploadFont">Upload Font</label>
+        <input type="file" class="form-control" id="uploadFont" accept=".woff,.ttf,.otf, "/>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Font Upload preview code 
+    //https://jsfiddle.net/bootstrapious/8w7a50n2
+    $(function () {
+      $('#uploadFont').on('change', function () {
+          readFontURL(inputFont);
+      });
+    });
+    function readFontURL(inputFont) {
+      if (inputFont.files && inputFont.files[0]) {
+          var reader = new FileReader();
+  
+          reader.onload = function (e) {
+              
+              console.log('base64 of uploaded font ' + reader.result);
+              document.getElementById('hiddenfontBase64').value = reader.result;  
+              //MK TODO: Set sdk.setData( imageBase64 = reader.result)
+          };
+          reader.readAsDataURL(inputFont.files[0]);
       }
+    }
+
+    var inputFont = document.getElementById( 'uploadFont' );
+    inputFont.addEventListener( 'change', showFontName );
+    function showFontName( event ) {
+      console.log('showFontName fn.')
+      var inputFont = event.srcElement;
+      var fileName = inputFont.files[0].name;
+    }
+    /*  ==========================================
+        SHOW UPLOADED IMAGE NAME
     
-      function renderPreview() {
-        sdk.getData(function (data) {
-          var btntext = document.getElementById("text-input-id-btn-text").value;
-          var align = document.getElementById('select-align').selectedOptions[0].value;
-          var imgurl = document.getElementById("text-input-id-img-url").value;
-          sdk.setData({
-            buttonText: btntext,
-            imgurl : imgurl, 
-            align: align,
-            htmlButton: getHtml(btntext, imgurl, align),
-          });
+    var input = document.getElementById( 'uploadImage' );
+    var infoArea = document.getElementById( 'upload-label' );
 
-          //Set content for preview
-          sdk.setContent(getHtml(btntext, imgurl, align));
-        });
+    input.addEventListener( 'change', showFileName );
+    function showFileName( event ) {
+      var input = event.srcElement;
+      var fileName = input.files[0].name;
+      infoArea.textContent = 'File name: ' + fileName;
+      infoArea.style.display = "block"
+    }* ========================================== */
+
+  </script>
+  <!-- Addition Settings - End -->
+  <!-- Image - Start -->
+  <div class="row">
+    <div class="col-sm">
+      <div class="jumbotron text-left">
+        <p>Image</p>
+        <div class="d-flex p-2">Tip: provide an external URL or browse from assets</div>
+        <label for="imageUrl">External URL</label>
+        <input type="text" class="form-control" id="imageUrl">
+        <label class="d-flex p-2" for="uploadImage">Upload Image</label>
+        <input type="file" class="form-control" id="uploadImage" accept=".jpg,.gif,.png" />
+      </div>
+    </div>
+  </div>
+  <div class="image-area mt-4" style="text-align: center;">
+    <label id="upload-label" for="imageResult" class="font-weight-light text-muted" style="display:none">File name</label>
+    <img id="imageResult" src="#" alt=""class="img-fluid rounded shadow-sm mx-auto d-block">
+  </div>
+  <script>
+
+    //Image url preview code 
+    document.getElementById('imageUrl').addEventListener("input", function(e){
+        document.getElementById('hiddenimageUrl').value = document.getElementById('imageUrl').value; 
+        console.log('imageUrl saved to hidden field ' + imageUrl)
+        }
+    );
+
+    // Image Upload preview code 
+    //https://jsfiddle.net/bootstrapious/8w7a50n2
+    $(function () {
+      $('#uploadImage').on('change', function () {
+          readURL(input);
+      });
+    });
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+  
+          reader.onload = function (e) {
+              $('#imageResult')
+                  .attr('src', e.target.result)
+                  .attr('style','height: 100px; width: 100px;');
+
+              console.log('base64 of uploaded image ' + reader.result);
+              document.getElementById('hiddenimageBase64').value = reader.result;  
+              //MK TODO: Set sdk.setData( imageBase64 = reader.result)
+          };
+          reader.readAsDataURL(input.files[0]);
       }
+    }
 
-      var textAreaContent;
-      var errMsg;
-      var debug = true;
+    /*  ==========================================
+        SHOW UPLOADED IMAGE NAME
+    * ========================================== */
+    var input = document.getElementById( 'uploadImage' );
+    var infoArea = document.getElementById( 'upload-label' );
 
-      const debounce = (fn, delay) => {
-        let timeOutID;
-        return function (...args) {
-          if (timeOutID) {
-            clearTimeout(timeOutID);
-          }
-          timeOutID = setTimeout(() => {
-            fn(...args);
-          }, delay);
-        };
-      };
+    input.addEventListener( 'change', showFileName );
+    function showFileName( event ) {
+      var input = event.srcElement;
+      var fileName = input.files[0].name;
+      infoArea.textContent = 'File name: ' + fileName;
+      infoArea.style.display = "block"
+    }
 
-      var btntext = document.getElementById("text-input-id-btn-text").value;
-      var imgurl = document.getElementById("text-input-id-img-url").value;
-      var align = document.getElementById('select-align').selectedOptions[0].value;
+  </script>
+  <!-- Image - End -->
+  <!-- Image Position - Start -->
+  <div class="row">
+    <div class="col-sm">
+      <div class="jumbotron text-left">
+        <p>Image Position</p>
+        <div class = "jumbotron" style="background-color: beige; width:50%; height: 50%; margin: auto">
+          <div>left</div>
+          <div>right</div>
+          <div>top</div>
+          <div>bottom</div>
+          <div class = "jumbotron" style="background-color:burlywood; width:100%; height: 100%; margin: auto">
+          </div>
+        </div>
+    </div>
+  </div>
+  <!-- Image Position - End -->
+  <br>
+  <!-- Submit - Start -->
+  <input type="button" id="submit" value="submit"/>
+  <script>
+      //mk123 TODO - See if CK Editor on change can be used
+      document.querySelector( '#submit' ).addEventListener( 'click', () => {
+        const editorData = editor.getData();
+        document.getElementById('hiddentextOverImage').value = editorData;
+        console.log(editorData);
 
-      var sdk = new window.sfdc.BlockSDK({
+        saveData()
+      });
+  </script>
+  <!-- Submit - End -->
+</div>
+<!-- Script for SDK - Start -->
+<script>
+    var sdk = new window.sfdc.BlockSDK({
         blockEditorWidth: 500,
         tabs: ["htmlblock", "stylingblock"],
       });
-
-      /* Reset Everything */
-      document.getElementById("alertBox").style.display = "none";
-      document.getElementById("errorMsg").innerHTML = "";
-      sdk.setBlockEditorWidth(500, function (data) {
-        //consoleprint(debug, "Block width set to 500. Data received " + data);
-      });
-      document.getElementById("renderBtn").addEventListener(
-          "click",
-          renderPreview
-        );      
-
-      sdk.getContent(function (content) {
-        if (content) {
-          sdk.setContent(content, function (contentFound) {
-          });
-        } 
-      });
-
-      sdk.getData(function (data) {
-        if (isEmptyObject(data)) {
-          document.getElementById("text-input-id-btn-text").value = "Enter Text for overlaying";
-          document.getElementById("text-input-id-img-url").value = "https://upload.wikimedia.org/wikipedia/commons/1/1b/Sf-marketingcloud-logo.png";
-          document.getElementById('select-align').value = 'Left';
-        } else {
-          document.getElementById("text-input-id-btn-text").value = data["buttonText"];
-          document.getElementById("text-input-id-img-url").value = data["imgurl"]
-          document.getElementById('select-align').value = data['align'];
+    sdk.getData(function (data) {
+        if(isEmptyObject(data)) {
+            //empty - set default value in screen
+        }else {
+            //Not empty - set stored value in screen
         }
-      });
+    });
 
-    </script>
+    function saveData() {
+        var hiddentextOverImage = document.getElementById('hiddentextOverImage').value;
+        var hiddenfontBase64 = document.getElementById('hiddenfontBase64').value;
+        var hiddenimageUrl = document.getElementById('hiddenimageUrl').value;
+        var hiddenimageBase64 = document.getElementById('hiddenimageBase64').value;
+        var hiddenimagePosition_width = document.getElementById('hiddenimagePosition_width').value;
+        var hiddenimagePosition_height = document.getElementById('hiddenimagePosition_height').value;
+        var data = {
+            textOverImage : hiddentextOverImage,
+            fontBase64 : hiddenfontBase64,
+            imageUrl : hiddenimageUrl,
+            imageBase64 : hiddenimageBase64,
+            imagePosition : {
+                width : '100px',
+                height : '100px',
+                margin : {
+                    top : '5px',
+                    bottom : '5px',
+                    left : '5px',
+                    right : '5px'
+                },
+                padding : {
+                    top : '5px',
+                    bottom : '5px',
+                    left : '5px',
+                    right : '5px'
+                }
+            }
+        }
 
-    <script>
-      function isEmptyObject(obj) {
+
+        sdk.getData(function (data) {
+            sdk.setData(data);//Set Data Ends
+        });//Get Data Ends
+
+        //Set content for preview
+        sdk.setContent(generateHTMLContent(data));
+    }//Save Data Ends 
+
+    function generateHTMLContent(dataJson){
+        var posContent;
+        //harcoded - mk123
+        position = 'centered';
+        if(position == 'bottom-left') {
+          posContent = '<div style="position: absolute;bottom: 8px;left: 16px;">'+dataJson.textOverImage+'</div>'
+        }else if(position == 'top-left') {
+          posContent = '<div style="position: absolute;top: 8px;left: 16px;">'+dataJson.textOverImage+'</div>'
+        }else if(position == 'top-right') {
+          posContent = '<div style="position: absolute;top: 8px;right: 16px;">'+dataJson.textOverImage+'</div>'
+        }else if(position == 'bottom-right') {
+          posContent = '<div style="position: absolute;bottom: 8px;right: 16px;">'+dataJson.textOverImage+'</div>'
+        }else if(position == 'centered') {
+          posContent = '<div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">'+dataJson.textOverImage+'</div>'
+        }
+       
+        var htmlContent = `<div style="position: relative;text-align: center;color: white;">
+            <img src="${dataJson.imageBase64}" alt="Snow" style="width:100%;">
+            ${posContent}
+          </div>
+          `;
+        console.log('HTML to render ' + htmlContent);
+        return htmlContent;
+
+
+    }
+
+    function isEmptyObject(obj) {
         for (var i in obj) return false;
         return true;
-      }       
-      function consoleprint(debug, msg) {
-        debug ? console.log(msg) : "";
-      }
-
-      /* close button in error msg */
-      var closebtns = document.getElementsByClassName("close");
-      var i;
-
-      for (i = 0; i < closebtns.length; i++) {
-        closebtns[i].addEventListener("click", function () {
-          this.parentElement.parentElement.style.display = "none";
-        });
-      }
-    </script>
-  </body>
+      }   
+</script>
+<!-- Script for SDK - End -->
+</body>
 </html>
