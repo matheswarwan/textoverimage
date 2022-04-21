@@ -219,8 +219,21 @@
     sdk.getData(function (data) {
         if(isEmptyObject(data)) {
             //empty - set default value in screen
+            editor.setData("text-input-id-btn-text").value = "Enter Text for overlaying";
         }else {
             //Not empty - set stored value in screen
+            //Set hidden input value
+            document.getElementById('hiddentextOverImage').value = data.textOverImage;
+            document.getElementById('hiddenfontBase64').value = data.fontBase64;
+            document.getElementById('hiddenimageUrl').value = data.imageUrl;
+            document.getElementById('hiddenimageBase64').value = data.imageBase64;
+            document.getElementById('hiddenimagePosition_width').value = data.imagePosition.width;
+            document.getElementById('hiddenimagePosition_height').value = data.imagePosition.height;
+
+            //Set UI Value
+            editor.setData(data.textOverImage);
+            document.getElementById('imageUrl').value = data.imageUrl;
+            document.getElementById('imageResult').src = data.imageBase64; // mk todo - show file name in UI
         }
     });
 
@@ -286,8 +299,6 @@
           `;
         console.log('HTML to render ' + htmlContent);
         return htmlContent;
-
-
     }
 
     function isEmptyObject(obj) {
