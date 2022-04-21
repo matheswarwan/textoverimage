@@ -285,16 +285,10 @@
         imgTag.style = "width:100%;"
 
         parentDiv.appendChild(imgDiv);
-        
 
-        var el = document.createElement("p");
-        el.appendChild(parentDiv);
+        console.log('HTML to render ' + parentDiv.outerHTML);
 
-
-        var parentDivAsHTML = el.outerHTML;
-        console.log('HTML to render ' + parentDivasHTML);
-
-        return parentDivasHTML;
+        return parentDiv.outerHTML;
 
         /* set font - end */
         
