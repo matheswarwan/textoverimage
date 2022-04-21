@@ -279,20 +279,30 @@
     }//Save Data Ends 
 
     function generateHTMLContent(dataJson){
+        //setting font 
+        var fontName = 'customFont'
+        var newStyle = document.createElement('style');
+        newStyle.appendChild(document.createTextNode('@font-face{font-family: '+fontName+'; src: url('+dataJson.fontBase64+');}'));
+        document.body.appendChild(newStyle);
+        
         var posContent;
         //harcoded - mk123
+        //setting position 
         position = 'centered';
         if(position == 'bottom-left') {
-          posContent = '<div style="position: absolute;bottom: 8px;left: 16px;">'+dataJson.textOverImage+'</div>'
+          posContent = '<div style="font-family: customFont; position: absolute;bottom: 8px;left: 16px;">'+dataJson.textOverImage+'</div>'
         }else if(position == 'top-left') {
-          posContent = '<div style="position: absolute;top: 8px;left: 16px;">'+dataJson.textOverImage+'</div>'
+          posContent = '<div style="font-family: customFont; position: absolute;top: 8px;left: 16px;">'+dataJson.textOverImage+'</div>'
         }else if(position == 'top-right') {
-          posContent = '<div style="position: absolute;top: 8px;right: 16px;">'+dataJson.textOverImage+'</div>'
+          posContent = '<div style="font-family: customFont; position: absolute;top: 8px;right: 16px;">'+dataJson.textOverImage+'</div>'
         }else if(position == 'bottom-right') {
-          posContent = '<div style="position: absolute;bottom: 8px;right: 16px;">'+dataJson.textOverImage+'</div>'
+          posContent = '<div style="font-family: customFont; position: absolute;bottom: 8px;right: 16px;">'+dataJson.textOverImage+'</div>'
         }else if(position == 'centered') {
-          posContent = '<div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">'+dataJson.textOverImage+'</div>'
+          posContent = '<div style="font-family: customFont; position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">'+dataJson.textOverImage+'</div>'
         }
+
+        //document.getElementById('f').setAttribute('font-family', name)
+
        
         var htmlContent = `<div style="position: relative;text-align: center;color: white;">
             <img src="${dataJson.imageBase64}" alt="Snow" style="width:100%;">
