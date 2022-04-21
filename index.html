@@ -268,15 +268,6 @@
 
     function generateHTMLContent(dataJson){
         /* set font - start */
-        var fontName = 'customFont'
-        var parentDiv = document.createElement('parentDiv')
-        var newStyle = document.createElement('style');
-        newStyle.appendChild(document.createTextNode('@font-face{font-family: '+fontName+'; src: url('+dataJson.fontBase64+');}'));
-        //document.body.appendChild(newStyle);
-        document.getElementById('parentDiv').appendChild(newStyle);
-
-
-
 
         var fontName = 'customFont'
         var parentDiv = document.createElement('div')
