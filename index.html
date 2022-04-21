@@ -271,13 +271,14 @@
 
         var fontName = 'customFont'
         var parentDiv = document.createElement('div')
+        parentDiv.style = "position: relative;text-align: center;color: white;";
         var newStyle = document.createElement('style');
         newStyle.appendChild(document.createTextNode('@font-face{font-family: '+fontName+'; src: url('+dataJson.fontBase64+');}'));
         //document.body.appendChild(newStyle);
         parentDiv.appendChild(newStyle);
 
         var imgDiv = document.createElement('div');
-        imgDiv.style = "position: relative;text-align: center;color: white; font-family: customFont"; /* mk123 TODO : change this based on position ; only if customfont is present, add this*/
+        imgDiv.style = "position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);font-family: customFont"; /* mk123 TODO : change this based on position ; only if customfont is present, add this*/
         imgDiv.innerHTML = dataJson.textOverImage;
         var imgTag = document.createElement('img');
         imgTag.src = dataJson.imageBase64; 
