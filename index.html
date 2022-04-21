@@ -217,6 +217,7 @@
         tabs: ["htmlblock", "stylingblock"],
       });
     sdk.getData(function (data) {
+        console.log('Data on page load ' + data);
         if(isEmptyObject(data)) {
             //empty - set default value in screen
             editor.setData("Enter Text for overlaying");
