@@ -269,7 +269,8 @@
         }
 
 
-        sdk.getData(function (data) {
+        sdk.getData(function (gdata) {
+            console.log('Get Data on Save ' + JSON.stringify(gdata));
             sdk.setData(data);//Set Data Ends
         });//Get Data Ends
 
